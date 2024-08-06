@@ -1,0 +1,34 @@
+/* Store.css */
+
+.store-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .store-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .left-title {
+    display: flex;
+    align-items: center;
+  }
+  
+  .store-title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .right-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Adjust the gap between dropdown and search bar */
+  }
+  
+  .search-bar {
+    width: 200px; /* Adjust width as needed */
+  }
+  
