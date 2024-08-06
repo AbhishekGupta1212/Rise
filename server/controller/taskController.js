@@ -2,10 +2,25 @@ const {TaskModule} = require("../model/tasksModel")
 
 const getAllTasks = async(req,res)=>{
     try {
-        const{userId , ...filters} = req.query;
-       
-        const tasks = await TaskModule.find({ userId, ...filters });
-        res.send({tasks})
+        const {sort ,search, ...filters} = req.query;
+        let sortCriteria = {};
+        if(sort){
+            const [field, order] = sort.split(':');
+            sortCriteria[field] = order === 'desc' ? -1 : 1;
+        }
+        if(search){
+            const searchRegex = new RegExp(search, 'i');
+            filters.$or = [
+                { id: isNaN(Number(search)) ? undefined : Number(search) },
+                { title: searchRegex },
+                { milestone: searchRegex },
+                { relatedTo: searchRegex },
+                { assignedTo: searchRegex },
+                { status : searchRegex}
+            ].filter(filter => Object.values(filter).some(value => value !== undefined));
+        }
+        const tasks = await TaskModule.find(filters).sort(sortCriteria);
+        res.send({ tasks });
     } catch (error) {
         res.status(401).send({ error: "Error in fetching data!" });
     }

@@ -17,11 +17,21 @@ const createClient = async(req,res)=>{
 
 const getAllClients = async(req,res)=>{
     try {
-        const {sort , ...filters} = req.query;
+        const {sort ,search, ...filters} = req.query;
         let sortCriteria = {};
         if(sort){
             const [field, order] = sort.split(':');
             sortCriteria[field] = order === 'desc' ? -1 : 1;
+        }
+        if(search){
+            const searchRegex = new RegExp(search, 'i');
+            filters.$or = [
+                { id: isNaN(Number(search)) ? undefined : Number(search) },
+                { name: searchRegex },
+                { primaryContact: searchRegex },
+                { clientGroup: searchRegex },
+                { label: searchRegex }
+            ].filter(filter => Object.values(filter).some(value => value !== undefined));
         }
         const clients = await ClientModule.find(filters).sort(sortCriteria);
         res.send({ clients });

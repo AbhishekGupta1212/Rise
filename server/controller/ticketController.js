@@ -3,15 +3,26 @@ const {ClientModule} = require("../model/clientModel")
 
 const getAllTickets = async(req,res)=>{
     try {
-        const {sort, ...filters} = req.query;
+        const { sort, search, ...filters } = req.query;
         let sortCriteria = {};
 
-        if(sort){
+        if (sort) {
             const [field, order] = sort.split(':');
             sortCriteria[field] = order === 'desc' ? -1 : 1;
         }
+
+        if (search) {
+            const searchRegex = new RegExp(search, 'i');
+            filters.$or = [
+                { ticketID: isNaN(Number(search)) ? undefined : Number(search) },
+                { title: searchRegex },
+                { status: searchRegex },
+                { ticketType: searchRegex },
+                { assignedTo: searchRegex }
+            ].filter(filter => Object.values(filter).some(value => value !== undefined));
+        }
         const tickets = await Ticket.find(filters).sort(sortCriteria).populate('client', 'name');
-        res.send({tickets});
+        res.send({ tickets });
         
     } catch (error) {
         res.status(401).send({ error: "Error in fetching data!" });    }
