@@ -283,7 +283,6 @@ const Tickets = () => {
                             <Option value="Client Replied">Client Replied</Option>
                         </Select>
                     </Form.Item>
-
                 </Form>
             </Modal>
         </div>

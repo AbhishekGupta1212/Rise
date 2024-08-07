@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown, Button, Input, Space, Menu } from 'antd';
 import { DownOutlined, SearchOutlined } from '@ant-design/icons';
-import './SalesStore.css'; // Add your custom styles if any
+import './Styles/SalesStore.css'; // Add your custom styles if any
 
 const { SubMenu } = Menu;
 

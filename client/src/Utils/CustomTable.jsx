@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Table, Button } from 'antd';
-
+import {EditOutlined,DeleteOutlined} from '@ant-design/icons'
 const CustomTable = ({ columns, data, showButtons }) => {
   const [headers, setHeaders] = useState(columns);
 
@@ -17,11 +17,11 @@ const CustomTable = ({ columns, data, showButtons }) => {
             key: 'actions',
             render: (_,rowIndex) => (
               <span>
-                <Button onClick={() => alert(`Edit row ${rowIndex}`)} type="link">
-                  Edit
+                <Button icon={<EditOutlined />} onClick={() => alert(`Edit row ${rowIndex}`)} type="link">
+                
                 </Button>
-                <Button onClick={() => alert(`Delete row ${rowIndex}`)} type="link">
-                  Delete
+                <Button icon={<DeleteOutlined />} onClick={() => alert(`Delete row ${rowIndex}`)} type="link">
+               
                 </Button>
               </span>
             ),

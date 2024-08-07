@@ -373,14 +373,13 @@ import { EditOutlined, DeleteOutlined, FilterOutlined, SearchOutlined, UploadOut
 
 const { Option } = Select;
 
-// Dummy Data
+
 const initialProjectData = [
   { key: '1', id: '23', title: 'Online Course Creation and Launch', client: 'Zoila Hauck', price: '-', startDate: '2024-07-28', endDate: '2024-08-09', progress: '0%', status: 'Upcoming' },
   { key: '2', id: '13', title: 'Social Media Influencer Collaboration', client: 'Alta Cassin', price: '$2,500.00', startDate: '2024-07-27', endDate: '2023-09-02', progress: '0%', status: 'Processing' },
   { key: '3', id: '15', title: 'Website Redesign', client: 'John Doe', price: '$5,000.00', startDate: '2024-08-01', endDate: '2024-08-15', progress: '50%', status: 'Open' },
   { key: '4', id: '16', title: 'SEO Optimization', client: 'Jane Smith', price: '$3,000.00', startDate: '2024-07-20', endDate: '2024-07-30', progress: '100%', status: 'Complete' },
    {key: '5', id: '17', title: 'Mobile App Development', client: 'Acme Corp', price: '$10,000.00', startDate: '2024-08-05', endDate: '2024-09-05', progress: '0%', status: 'Pending' },
-  // Add more data as needed
 ];
 
 const statusColors = {

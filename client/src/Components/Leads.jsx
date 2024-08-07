@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
 import { Button, Input, Space, Tabs, Dropdown, Menu, Flex } from 'antd';
 import { SearchOutlined, PlusOutlined, TagsOutlined, UploadOutlined, FilterOutlined, TableOutlined, UserOutlined, PhoneOutlined, PrinterOutlined, FileExcelOutlined } from '@ant-design/icons';
-import CustomTable from './CustomTable';
-import CustomModal from './CustomModal';
+import CustomTable from '../Utils/CustomTable';
+import CustomModal from '../Utils/CustomModal';
 
 const { TabPane } = Tabs;
 const initialColumns = ['Name', 'Age', 'Location'];

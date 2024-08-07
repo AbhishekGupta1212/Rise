@@ -8,16 +8,16 @@ import {
   BellOutlined,
 } from '@ant-design/icons';
 import { Card, Progress, Typography } from 'antd';
-import './DashboardContent.css'; 
-import InvoiceOverviewCard from './InvoiceOverviewCard';
+import '../Components/Sales/Styles/DashboardContent.css'; 
+import InvoiceOverviewCard from './Sales/InvoiceOverviewCard';
 import IncomeVsExpensesOverviewCard from './IncomeVsExpensesOverviewCard';
 import AllTasksOverviewCard from './AllTasksOverviewCard';
-import TeamMembersOverviewCard from './TeamMembersOverviewCard';
-import TicketStatusCard from './TicketStatusCard';
-import ProjectTimeline from "./ProjectTimeline";
+import TeamMembersOverviewCard from './Team/TeamMembersOverviewCard';
+import TicketStatusCard from './Tickets/TicketStatusCard';
+import ProjectTimeline from "./Project/ProjectTimeline";
 import EventsCard from "./EventsCard";
 import TodoPrivateCard from "./TodoPrivateCard"
-import ProjectsOverview from './ProjectsOverview';
+import ProjectsOverview from './Project/ProjectsOverview';
 
 const { Title, Text } = Typography;
 

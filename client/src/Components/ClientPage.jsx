@@ -1,9 +1,7 @@
-
-
 import React, { useState } from 'react';
 import { Layout, Menu, Card, Row, Col, Space, Button, Typography, Progress, Table, Tag, Avatar, Input, Dropdown, Menu as AntMenu, Modal, Form, Select, Checkbox, Upload, message, List } from 'antd';
 import { UserOutlined, TeamOutlined, SolutionOutlined, FileAddOutlined, UploadOutlined, EditOutlined, DeleteOutlined, FilterOutlined, SearchOutlined } from '@ant-design/icons';
-import Papa from 'papaparse'; // For parsing CSV files
+import Papa from 'papaparse';
 
 const { Header, Content } = Layout;
 const { Title, Text } = Typography;
@@ -79,7 +77,7 @@ const ClientTable = ({ data, onUpdate }) => {
   const handleDelete = key => {
     const updatedData = filteredData.filter(item => item.key !== key);
     setFilteredData(updatedData);
-    onUpdate(updatedData); // Notify parent component
+    onUpdate(updatedData); 
   };
   const handleGroupFilter = e => {
     const value = e.key;
@@ -108,7 +106,7 @@ const ClientTable = ({ data, onUpdate }) => {
     );
     setFilteredData(updatedData);
     setIsEditModalVisible(false);
-    onUpdate(updatedData); // Notify parent component
+    onUpdate(updatedData);
   };
 
   const applyFilters = (search, group, hasDue) => {
@@ -123,7 +121,6 @@ const ClientTable = ({ data, onUpdate }) => {
     setFilteredData(filtered);
   };
 
-  // Dropdown menu definitions for group filter
   const clientGroupMenu = (
     <Menu>
       <Menu.Item key="All Clients">All Clients</Menu.Item>
@@ -134,12 +131,8 @@ const ClientTable = ({ data, onUpdate }) => {
     </Menu>
     
   );
-
-
-
-
   return (
-    <Card>
+    <Card actionsBg='rgb(255 255 255)'>
       <Title level={4}>Clients</Title>
       <Space style={{ marginBottom: 16, width: '100%', justifyContent: 'space-between' }}>
         <Space>
@@ -614,9 +607,9 @@ const MainClient = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Header>
+      <Header >
         <Space style={{ width: '100%', justifyContent: 'space-between' }}>
-          <Menu theme="dark" mode="horizontal" selectedKeys={[current]} onClick={handleClick} style={{ lineHeight: '64px' }}>
+          <Menu theme="light" mode="horizontal" selectedKeys={[current]} onClick={handleClick} style={{ lineHeight: '64px' }}>
             <Menu.Item key="overview">Overview</Menu.Item>
             <Menu.Item key="clients">Clients</Menu.Item>
             <Menu.Item key="contacts">Contacts</Menu.Item>
@@ -754,4 +747,4 @@ const MainClient = () => {
   );
 };
 
-export default MainClient;
+export default MainClient;

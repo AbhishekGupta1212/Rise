@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
 import { Button, Input, DatePicker, Select, Space, Flex } from 'antd';
 import { SearchOutlined, PlusOutlined, TagsOutlined, FileExcelOutlined, PrinterOutlined } from '@ant-design/icons';
-import CustomTable from './CustomTable';
-import CustomModal from './CustomModal';
+import CustomTable from '../Utils/CustomTable';
+import CustomModal from '../Utils/CustomModal';
 
 const { Option } = Select;
 const initialColumns = ['Name', 'Age', 'Location'];
@@ -11,7 +11,7 @@ const data = [
   ['Jane', 32, 'Chicago'],
   ['Doe', 22, 'San Francisco'],
 ];
-const Subscription = () => {
+const Subscriptions = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
@@ -174,7 +174,7 @@ const Subscription = () => {
   );
 };
 
-export default Subscription;
+export default Subscriptions;
 
 
 
