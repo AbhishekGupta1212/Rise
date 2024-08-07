@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'antd';
-import {EditOutlined,DeleteOutlined} from '@ant-design/icons'
-const CustomTable = ({ columns, data, showButtons }) => {
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+
+const CustomTable = ({ columns, data = [], showButtons, onButtonDelete, onButtonEdit }) => {
   const [headers, setHeaders] = useState(columns);
+
+  useEffect(() => {
+    console.log('Columns:', headers);
+    console.log('Data:', data);
+  }, [headers, data]);
 
   const columnsWithActions = [
     ...headers.map((header, index) => ({
@@ -15,31 +21,30 @@ const CustomTable = ({ columns, data, showButtons }) => {
           {
             title: 'Actions',
             key: 'actions',
-            render: (_,rowIndex) => (
-              <span>
-                <Button icon={<EditOutlined />} onClick={() => alert(`Edit row ${rowIndex}`)} type="link">
-                
+            render: (_, record) => (
+              <>
+                <Button onClick={() => onButtonEdit(record._id)} type="link">
+                  Edit
                 </Button>
-                <Button icon={<DeleteOutlined />} onClick={() => alert(`Delete row ${rowIndex}`)} type="link">
-               
+                <Button onClick={() => onButtonDelete(record._id)} type="link">
+                  Delete
                 </Button>
-              </span>
+              </>
             ),
           },
         ]
       : []),
   ];
 
-  const tableData = data.map((row, rowIndex) =>
-    row.reduce(
-      (acc, cell, cellIndex) => ({
-        ...acc,
-        [`column${cellIndex}`]: cell,
-        key: rowIndex,
-      }),
-      {}
-    )
-  );
+  // Ensure each row has a unique key
+  const tableData = Array.isArray(data)
+    ? data.map((row) => ({
+        ...row,
+        key: row._id || Math.random().toString(36).substr(2, 9), 
+      }))
+    : [];
+
+  console.log('Table Data:', tableData);
 
   return <Table columns={columnsWithActions} dataSource={tableData} />;
 };

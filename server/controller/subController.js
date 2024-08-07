@@ -16,7 +16,7 @@ const addSub = async(req,res)=>{
 // GET Aasync(req,res)=>{
     const getAllSub = async(req,res)=>{
         try {
-            // const subs=await SubscriptionModel.find()
+            // let subs=await SubscriptionModel.find()
             // res.status(200).send(subs)
             const {sort ,search, ...filters} = req.query;
             let sortCriteria = {};

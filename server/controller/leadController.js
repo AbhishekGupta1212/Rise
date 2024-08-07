@@ -37,7 +37,7 @@ const getAllLeads = async(req,res)=>{
             ].filter(filter => Object.values(filter).some(value => value !== undefined));
         }
         const clients = await leadModel.find(filters).sort(sortCriteria);
-        res.send({ leads });
+        res.send(clients);
     } catch (error) {
         res.status(400).send(error.message)
     }

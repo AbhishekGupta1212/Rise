@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb, Row, Col, Input, Button, Dropdown, Space, Tag, Typography, Modal } from 'antd';
 import { DownOutlined, UserOutlined, LaptopOutlined, NotificationOutlined, PlusOutlined, SearchOutlined, FilterOutlined, DownCircleOutlined, BugOutlined, UpOutlined, UsergroupAddOutlined, SunOutlined,TagOutlined,UploadOutlined } from '@ant-design/icons';
 import { useState } from 'react';
+import CustomTable from '../Utils/CustomTable';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Title, Paragraph } = Typography;
@@ -141,7 +142,9 @@ const Tasks = () => {
         <p>Some contents...</p>
         <p>Some contents...</p>
       </Modal>
+        {/* <CustomTable/> */}
     </Layout>
+  
   );
 };
 
