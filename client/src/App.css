@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+.custom-round-button:hover {
+  background-color: #f0f0f0;
+}
+
+.custom-square-button:hover {
+  background-color: #d9d9d9;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blinking {
+  animation: blink 1s infinite;
+}
+
+.search-bar {
+  width: 200px;
+  margin-right: 16px;
+}
