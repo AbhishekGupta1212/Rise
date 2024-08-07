@@ -48,9 +48,9 @@ const MainContent = () => {
           <Menu.Item key="1" icon={<DesktopOutlined />} onClick={() => navigate('/dashboard')}>
             Dashboard
           </Menu.Item>
-          <Menu.Item key="2" icon={<CalendarOutlined />} onClick={() => navigate('/dashboard')}>
+          {/* <Menu.Item key="2" icon={<CalendarOutlined />} onClick={() => navigate('/dashboard')}>
             Events
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item key="3" icon={<ShoppingOutlined />} onClick={() => navigate('/clients')}>
             Clients
           </Menu.Item>
@@ -80,7 +80,7 @@ const MainContent = () => {
               Payment
             </Menu.Item>
           </SubMenu>
-          <SubMenu key="8" icon={<EllipsisOutlined />} title="Prospects">
+          {/* <SubMenu key="8" icon={<EllipsisOutlined />} title="Prospects">
             <Menu.Item key="7.1">
               Estimate List
             </Menu.Item>
@@ -93,13 +93,13 @@ const MainContent = () => {
             <Menu.Item key="7.4">
              Proposals
             </Menu.Item>
-          </SubMenu>
-          <Menu.Item key="9" icon={<BookOutlined />}>
+          </SubMenu> */}
+          {/* <Menu.Item key="9" icon={<BookOutlined />}>
             Notes
           </Menu.Item>
           <Menu.Item key="10" icon={<MessageOutlined />}>
             Messages
-          </Menu.Item>
+          </Menu.Item> */}
           <SubMenu key="11" icon={<UsergroupAddOutlined />} title="Team">
             <Menu.Item key="11.1" onClick={() => navigate('/team-members')}>
               Team Members
@@ -120,16 +120,16 @@ const MainContent = () => {
           <Menu.Item key="12" icon={<AccountBookOutlined />} onClick={() => navigate('/ticket')}>
             Tickets
           </Menu.Item>
-          <Menu.Item key="13" icon={<ArrowRightOutlined />}>
+          {/* <Menu.Item key="13" icon={<ArrowRightOutlined />}>
             Expenses
-          </Menu.Item>
-          <Menu.Item key="15" icon={<PieChartOutlined />}>
+          </Menu.Item> */}
+          {/* <Menu.Item key="15" icon={<PieChartOutlined />}>
             Reports
           </Menu.Item> 
            <Menu.Item key="16" icon={<AccountBookOutlined />}>
             Files
-          </Menu.Item>
-          <SubMenu key="17" icon={<QuestionCircleOutlined />} title="Help & Support">
+          </Menu.Item> */}
+          {/* <SubMenu key="17" icon={<QuestionCircleOutlined />} title="Help & Support">
             <Menu.Item key="17.1" >
             Help
             </Menu.Item>
@@ -151,7 +151,7 @@ const MainContent = () => {
           </SubMenu>
           <Menu.Item key="18" icon={<SettingOutlined />}>
             Settings
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
       </Sider>
       <Layout style={{ marginLeft: collapsed ? 80 : 200 }}>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown, Button, Input, Menu, Card, Modal, Table, notification } from 'antd';
 import { DownOutlined, SearchOutlined, CloseOutlined, EditOutlined, ShoppingCartOutlined } from '@ant-design/icons';
-import './SalesStore.css';
+import './Styles/SalesStore.css';
 
 const { Meta } = Card;
 

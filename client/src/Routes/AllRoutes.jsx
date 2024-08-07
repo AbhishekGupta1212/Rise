@@ -23,6 +23,7 @@ import TicketStatusCard from '../Components/Tickets/TicketStatusCard';
 import Leads from '../Components/Leads';
 import Subscriptions from '../Components/Subscriptions';
 import Tasks from '../Components/Tasks';
+import LeaveManagement from '../Components/Team/LeavePage';
 
 const Dashboard = () => <div><DashboardContent/></div>;
 const Task = () => <div><Tasks/></div>;
@@ -32,7 +33,7 @@ const Store = () => <div><SalesStore/></div>;
 const Payment = () => <div><Payments/></div>;
 const TeamMembers = () => <div><TeamMembersOverviewCard/></div>;
 const TimeCards = () => <div><TimeCardsPage/></div>;
-const Leave = () => <div></div>;
+const Leave = () => <div><LeaveManagement/></div>;
 const Timeline = () => <div><TimelinePage/></div>;
 const Announcement = () => <div><AnnouncementsPage/></div>;
 const Ticket = () => <div><Tickets/></div>
