@@ -30,7 +30,7 @@ const Tickets = () => {
 
     const fetchTickets = async (query) => {
         try {
-            const res = await axios.get('http://localhost:8080/tickets', {
+            const res = await axios.get('https://rise-backened-1.onrender.com/tickets', {
                 params: query
             });
             setTickets(res.data.tickets);
@@ -55,7 +55,7 @@ const Tickets = () => {
 
     const fetchClients = async () => {
         try {
-            const res = await axios.get('http://localhost:8080/clients');
+            const res = await axios.get('https://rise-backened-1.onrender.com/clients');
             setClients(res.data.clients);
         } catch (error) {
             message.error('Failed to fetch clients');
@@ -73,7 +73,7 @@ const Tickets = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/tickets/${id}`);
+            await axios.delete(`https://rise-backened-1.onrender.com/tickets/${id}`);
             message.success('Ticket deleted successfully');
             fetchTickets();
         } catch (error) {
@@ -85,13 +85,13 @@ const Tickets = () => {
         try {
             const values = await form.validateFields();
             if (editingTicket) {
-                await axios.patch(`http://localhost:8080/tickets/${editingTicket._id}`, {
+                await axios.patch(`https://rise-backened-1.onrender.com/tickets/${editingTicket._id}`, {
                     ...values,
                     lastActivity: values.lastActivity.format('YYYY-MM-DD HH:mm:ss'),
                 });
                 message.success('Ticket updated successfully');
             } else {
-                await axios.post('http://localhost:8080/tickets', {
+                await axios.post('https://rise-backened-1.onrender.com/tickets', {
                     ...values,
                     lastActivity: values.lastActivity.format('YYYY-MM-DD HH:mm:ss'),
                 });
