@@ -23,14 +23,23 @@ const createProject = async(req,res)=>{
 }
 
 //get 
- const getAllProjects = async(req,res)=>{
+const getAllProjects = async(req,res)=>{
     try {
-        const {sort, ...filters} = req.query;
+        const {sort,search, ...filters} = req.query;
         let sortCriteria ={};
 
         if(sort){
             const[field,order] = sort.split(':');
             sortCriteria[field] = order === 'desc' ? -1 : 1;
+        }
+        if (search) {
+            const searchRegex = new RegExp(search, 'i');
+            filters.$or = [
+                { id: isNaN(Number(search)) ? undefined : Number(search) },
+                { price : searchRegex },
+                { status: searchRegex },
+            
+            ].filter(filter => Object.values(filter).some(value => value !== undefined));
         }
         const projects = await Project.find(filters).sort(sortCriteria).populate('client', 'name');
         res.send({projects})

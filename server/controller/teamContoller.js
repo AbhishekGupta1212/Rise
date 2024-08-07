@@ -17,8 +17,26 @@ const addTeam = async(req,res)=>{
 // GET ALL
 const getAllTeam = async(req,res)=>{
     try {
-        const teams=await teamModel.find()
-        res.status(200).send(teams)
+        // const teams=await teamModel.find()
+        // res.status(200).send(teams)
+        const {sort ,search, ...filters} = req.query;
+        let sortCriteria = {};
+        if(sort){
+            const [field, order] = sort.split(':');
+            sortCriteria[field] = order === 'desc' ? -1 : 1;
+        }
+        if(search){
+            const searchRegex = new RegExp(search, 'i');
+            filters.$or = [ 
+                { FirstName: searchRegex },
+                { LastName: searchRegex },
+                { Email: searchRegex },
+                { Role: searchRegex },
+                { Gender: searchRegex}
+            ].filter(filter => Object.values(filter).some(value => value !== undefined));
+        }
+        const teams = await teamModel.find(filters).sort(sortCriteria);
+        res.send({ teams });
     } catch (error) {
         res.status(400).send(error.message)
     }
