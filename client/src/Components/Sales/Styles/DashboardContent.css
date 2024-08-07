@@ -1,0 +1,10 @@
+.custom-grid {
+    box-shadow: none !important;
+    border: 1px solid #f0f0f0 !important;
+    transition: none !important;
+  }
+  .custom-grid:hover {
+    box-shadow: none !important;
+    border-color: #f0f0f0 !important;
+  }
+  
