@@ -11,7 +11,10 @@ const Leads = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [leadData, setLeadData] = useState([]);
   const [editRecord, setEditRecord] = useState(null);
-
+  const [filters, setFilters] = useState({
+    status: '',
+    search: '',
+});
   useEffect(() => {
     fetchData();
   }, []);

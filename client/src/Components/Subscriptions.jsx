@@ -126,7 +126,7 @@ const fetchsubs=async () => {
             });
            console.log('Subscription created successfully');
         }
-        fetchTickets();
+        fetchsubs();
         setIsModalVisible(false);
         form.resetFields();
         setEditingRecord(null);
@@ -140,15 +140,14 @@ const fetchsubs=async () => {
     setEditingRecord(null);
   };
 
-  const handleEdit = (record) => {
-    setEditingRecord(record);
-    const fields = subFormFields.map(field => ({
-      ...field,
-      initialValue: record[field.name],
-    }));
-    setSubFormFields(fields);
+  const handleEdit = (sub) => {
+    setEditingRecord(sub);
     setIsModalVisible(true);
-  };
+    form.setFieldsValue({
+        ...sub,
+        lastActivity: moment(sub.lastActivity),
+    });
+};
 
   const handleDelete = (record) => {
     axios.delete(`https://rise-backened-1.onrender.com/subscription/${record.key}`)
