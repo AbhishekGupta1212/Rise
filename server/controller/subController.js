@@ -15,29 +15,29 @@ const addSub = async(req,res)=>{
 
 // GET Aasync(req,res)=>{
     const getAllSub = async(req,res)=>{
-        try {
-            // let subs=await SubscriptionModel.find()
-            // res.status(200).send(subs)
-            const {sort ,search, ...filters} = req.query;
-            let sortCriteria = {};
-            if(sort){
-                const [field, order] = sort.split(':');
-                sortCriteria[field] = order === 'desc' ? -1 : 1;
-            }
-            if(search){
-                const searchRegex = new RegExp(search, 'i');
-                filters.$or = [
-                    { Title: searchRegex },
-                    { Client: searchRegex },
-                    { Tax: searchRegex },
-                    { SecondTax: searchRegex },
-                    { Note: searchRegex },
-                    { Label: searchRegex },
-                    { Type: searchRegex}
-                ].filter(filter => Object.values(filter).some(value => value !== undefined));
-            }
-            const subs = await SubscriptionModel.find(filters).sort(sortCriteria);
-            res.send({ subs });
+    try {
+        // const subs=await SubscriptionModel.find()
+        // res.status(200).send(subs)
+        const {sort ,search, ...filters} = req.query;
+        let sortCriteria = {};
+        if(sort){
+            const [field, order] = sort.split(':');
+            sortCriteria[field] = order === 'desc' ? -1 : 1;
+        }
+        if(search){
+            const searchRegex = new RegExp(search, 'i');
+            filters.$or = [
+                { Title: searchRegex },
+                { Client: searchRegex },
+                { Tax: searchRegex },
+                { SecondTax: searchRegex },
+                { Note: searchRegex },
+                { Label: searchRegex },
+                { Type: searchRegex}
+            ].filter(filter => Object.values(filter).some(value => value !== undefined));
+        }
+        const subs = await SubscriptionModel.find(filters).sort(sortCriteria);
+        res.send({ subs });
     } catch (error) {
         res.status(400).send(error.message)
     }

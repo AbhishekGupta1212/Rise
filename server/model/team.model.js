@@ -12,7 +12,9 @@ SalaryTerm:String,
 DateOfHire:Date,
 Password:String,
 Role:String,
-})
+},{
+    versionKey : false
+  })
 
 const teamModel=mongoose.model('Team',teamSchema);
 

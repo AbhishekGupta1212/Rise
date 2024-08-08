@@ -6,7 +6,9 @@ const ItemSchema=mongoose.Schema({
     Category:String,
     Rate:Number,
     UnitType:String
-})
+},{
+    versionKey : false
+  })
 
 const ItemModel=mongoose.model('Items', ItemSchema)
 

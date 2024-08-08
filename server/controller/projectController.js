@@ -23,7 +23,7 @@ const createProject = async(req,res)=>{
 }
 
 //get 
-const getAllProjects = async(req,res)=>{
+ const getAllProjects = async(req,res)=>{
     try {
         const {sort,search, ...filters} = req.query;
         let sortCriteria ={};

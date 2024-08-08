@@ -1,4 +1,3 @@
-const express = require("express");
 
 const leadModel = require('../model/lead.model')
 // const leadRouter = express.Router();
@@ -36,11 +35,12 @@ const getAllLeads = async(req,res)=>{
                 { City: searchRegex}
             ].filter(filter => Object.values(filter).some(value => value !== undefined));
         }
-        const clients = await leadModel.find(filters).sort(sortCriteria);
-        res.send(clients);
+        const leads = await leadModel.find(filters).sort(sortCriteria);
+        res.send({ leads });
     } catch (error) {
         res.status(400).send(error.message)
     }
+
 }
 
 // GET ONE
@@ -89,20 +89,20 @@ const getLead = async(req,res)=>{
 
     // SEARCH & FILTER
 
-    const searchLead = async(req,res)=>{
-        const { name, Owner} = req.query;
-        const filter = {};
+    // const searchLead = async(req,res)=>{
+    //     const { name, Owner} = req.query;
+    //     const filter = {};
     
-        if (name) filter.name = name;
-        if (Owner) filter.Owner = Owner;
+    //     if (name) filter.name = name;
+    //     if (Owner) filter.Owner = Owner;
     
-        try {
-            const items = await lead.find(filter);
-            res.status(200).send(items);
-        } catch (error) {
-            res.status(400).send(error);
-        }
-    }
+    //     try {
+    //         const items = await lead.find(filter);
+    //         res.status(200).send(items);
+    //     } catch (error) {
+    //         res.status(400).send(error);
+    //     }
+    // }
 
 
-module.exports={createLead,getAllLeads, getLead , updateLead , searchLead,deleteLead}
+module.exports={createLead,getAllLeads, getLead , updateLead ,deleteLead}

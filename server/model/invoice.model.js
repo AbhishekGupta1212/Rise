@@ -14,7 +14,9 @@ InvoiceId:String,
 TotalInvoiced:String,
 PaymentRecieved:String,
 PaymentDue:String
-})
+},{
+    versionKey : false
+  })
 
 const Invoice=mongoose.model("Invoices",InvoiceSchema);
 

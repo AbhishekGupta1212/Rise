@@ -1,12 +1,12 @@
 const express = require("express");
-const { createLead, getAllLeads, updateLead, getLead, searchLead, deleteLead } = require("../controller/leadController");
+const { createLead, getAllLeads, updateLead, getLead, deleteLead } = require("../controller/leadController");
 
 leadRouter = express.Router();
 
 leadRouter.post("/",createLead)
 leadRouter.get("/",getAllLeads)
 leadRouter.get("/:id",getLead)
-leadRouter.get("/search",searchLead)
+// leadRouter.get("/search",searchLead)
 leadRouter.patch("/:id",updateLead)
 leadRouter.delete("/:id",deleteLead)
 

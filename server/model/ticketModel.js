@@ -34,7 +34,8 @@ const ticketSchema = mongoose.Schema({
         required: true,
         enum: ["Open", "New", "Client Replied", "Closed"],
         default: "New"
-    }
+    },
+
 },{
     versionKey : false
 })

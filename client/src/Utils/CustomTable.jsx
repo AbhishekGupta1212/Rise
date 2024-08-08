@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
+
 const CustomTable = ({ columns, data=[], showButtons, onButtonDelete, onButtonEdit }) => {
   const [headers, setHeaders] = useState(columns);
 

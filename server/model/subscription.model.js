@@ -14,7 +14,9 @@ const subSchema=mongoose.Schema({
     Cycle:String,
     Amount:String
 
-})
+},{
+    versionKey : false
+  })
 
 const SubscriptionModel=mongoose.model('Subscription',subSchema)
 

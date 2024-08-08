@@ -19,6 +19,8 @@ const leadSchema = mongoose.Schema(
       Labels:String,
       PrimaryContact:String,
     CurrentDate:Date
+  },{
+    versionKey : false
   }
 );
 

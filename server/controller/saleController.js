@@ -1,5 +1,5 @@
 
-const Invoice=require('../model/invoice.model');
+const Invoice= require('../model/invoice.model');
 const ItemModel = require("../model/items.model");
 
 
@@ -18,8 +18,28 @@ const addSales = async(req,res)=>{
 // GET ALL
 const getAllSales = async(req,res)=>{
     try {
-        const sales=await Invoice.find()
-        res.status(200).send(sales)
+        // const sales=await Invoice.find()
+        // res.status(200).send(sales)
+        const {sort ,search, ...filters} = req.query;
+        let sortCriteria = {};
+        if(sort){
+            const [field, order] = sort.split(':');
+            sortCriteria[field] = order === 'desc' ? -1 : 1;
+        }
+        if(search){
+            const searchRegex = new RegExp(search, 'i');
+            filters.$or = [
+                { Project: searchRegex },
+                { Client: searchRegex },
+                { Tax: searchRegex },
+                { SecondTax: searchRegex },
+                { Note: searchRegex },
+                { Label: searchRegex },
+                { TDS: searchRegex}
+            ].filter(filter => Object.values(filter).some(value => value !== undefined));
+        }
+        const sales = await Invoice.find(filters).sort(sortCriteria);
+        res.send({ sales });
     } catch (error) {
         res.status(400).send(error.message)
     }
@@ -100,8 +120,25 @@ const getSale = async(req,res)=>{
 // GET ALL ITEMS
     const getAllItems = async(req,res)=>{
         try {
-            const items=await ItemModel.find()
-            res.status(200).send(items)
+            // const items=await ItemModel.find()
+            // res.status(200).send(items)
+            const {sort ,search, ...filters} = req.query;
+            let sortCriteria = {};
+            if(sort){
+                const [field, order] = sort.split(':');
+                sortCriteria[field] = order === 'desc' ? -1 : 1;
+            }
+            if(search){
+                const searchRegex = new RegExp(search, 'i');
+                filters.$or = [
+                    { Title: searchRegex },
+                    { Description: searchRegex },
+                    { Category: searchRegex },
+                    { UnitType: searchRegex },
+                ].filter(filter => Object.values(filter).some(value => value !== undefined));
+            }
+            const items = await ItemModel.find(filters).sort(sortCriteria);
+            res.send({ items });
         } catch (error) {
             res.status(400).send(error.message)
         }

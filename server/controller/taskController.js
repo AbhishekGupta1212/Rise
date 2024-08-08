@@ -1,5 +1,16 @@
 const {TaskModule} = require("../model/tasksModel")
 
+// const getAllTasks = async(req,res)=>{
+//     try {
+//         const{sort ,search, ...filters} = req.query;
+       
+//         const tasks = await TaskModule.find({ userId, ...filters });
+//         res.send({tasks})
+//     } catch (error) {
+//         res.status(401).send({ error: "Error in fetching data!" });
+//     }
+// }
+
 const getAllTasks = async(req,res)=>{
     try {
         const {sort ,search, ...filters} = req.query;

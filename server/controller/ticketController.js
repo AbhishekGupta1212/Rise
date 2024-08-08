@@ -1,7 +1,7 @@
-const {Ticket} = require("../model/ticketModel");
-const {ClientModule} = require("../model/clientModel")
+const { Ticket } = require("../model/ticketModel");
+const { ClientModule } = require("../model/clientModel")
 
-const getAllTickets = async(req,res)=>{
+const getAllTickets = async (req, res) => {
     try {
         const { sort, search, ...filters } = req.query;
         let sortCriteria = {};
@@ -23,24 +23,25 @@ const getAllTickets = async(req,res)=>{
         }
         const tickets = await Ticket.find(filters).sort(sortCriteria).populate('client', 'name');
         res.send({ tickets });
-        
+
     } catch (error) {
-        res.status(401).send({ error: "Error in fetching data!" });    }
+        res.status(401).send({ error: "Error in fetching data!" });
+    }
 }
 
 //create
 
-const createTicket = async(req,res) =>{
+const createTicket = async (req, res) => {
     try {
-        const {ticketID,title,client, ticketType} = req.body;
+        const { ticketID, title, client, ticketType } = req.body;
         const clientExists = await ClientModule.findById(client);
 
-        if(!clientExists){
-            return res.status(404).send({error: "Client not found"});
+        if (!clientExists) {
+            return res.status(404).send({ error: "Client not found" });
         }
 
         const ticket = new Ticket({
-            ticketID,title,client, ticketType,status:"New"
+            ticketID, title, client, ticketType, status: "New"
         })
         await ticket.save();
         res.status(201).send({ msg: "Ticket Created Successfully" });
@@ -51,15 +52,15 @@ const createTicket = async(req,res) =>{
 
 //update
 
-const updateTicket = async(req,res)=>{
-    const {id} = req.params;
+const updateTicket = async (req, res) => {
+    const { id } = req.params;
     try {
-       const ticket = await Ticket.findByIdAndUpdate(id, req.body,{new: true});
+        const ticket = await Ticket.findByIdAndUpdate(id, req.body, { new: true });
 
-       if(!ticket){
-        return res.status(404).send({ error: 'Ticket not found' });
-       }
-       res.send(ticket);
+        if (!ticket) {
+            return res.status(404).send({ error: 'Ticket not found' });
+        }
+        res.send(ticket);
 
     } catch (error) {
         res.status(400).send({ error: error.message });
@@ -78,7 +79,7 @@ const deleteTicket = async (req, res) => {
     }
 }
 
-module.exports ={
+module.exports = {
     getAllTickets,
     createTicket,
     updateTicket,

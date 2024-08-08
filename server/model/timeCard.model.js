@@ -7,7 +7,9 @@ const timeCardSchema=mongoose.Schema({
     InDate:Date,
     OutDate:Date,
     Note:String
-})
+},{
+    versionKey : false
+  })
 
 const timeCardModel=mongoose.model('Time Card',timeCardSchema);
 
