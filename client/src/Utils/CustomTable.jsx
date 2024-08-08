@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-const CustomTable = ({ columns, data = [], showButtons, onButtonDelete, onButtonEdit }) => {
+const CustomTable = ({ columns, data=[], showButtons, onButtonDelete, onButtonEdit }) => {
   const [headers, setHeaders] = useState(columns);
 
   useEffect(() => {
@@ -36,13 +36,15 @@ const CustomTable = ({ columns, data = [], showButtons, onButtonDelete, onButton
       : []),
   ];
 
-  // Ensure each row has a unique key
+
   const tableData = Array.isArray(data)
     ? data.map((row) => ({
         ...row,
-        key: row._id || Math.random().toString(36).substr(2, 9), 
-      }))
+        key: row._id || Math.random().toString(36)}))
     : [];
+
+
+  
 
   console.log('Table Data:', tableData);
 

@@ -1,116 +1,92 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
-import { Button, Input, DatePicker, Select, Space, Flex } from 'antd';
+import { Button, Input, DatePicker, Select, Space, Flex,Modal,Form, InputNumber } from 'antd';
 import { SearchOutlined, PlusOutlined, TagsOutlined, FileExcelOutlined, PrinterOutlined } from '@ant-design/icons';
 import CustomTable from '../Utils/CustomTable';
 import CustomModal from '../Utils/CustomModal';
 
 const { Option } = Select;
-const initialColumns = ['Name', 'Age', 'Location'];
+const initialColumns = ['Subscription ID','Title',"Type","Client",'First Billing Date','Next Billing Date','Cycles','Status',"Amount"];
 const initialData = [] ;
 const Subscriptions = () => {
   const [data, setData] = useState(initialData);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [clients, setClients] = useState([]);
   const [editingRecord, setEditingRecord] = useState(null);
-  const [subFormFields, setSubFormFields] = useState([
-    {
-      name: 'type',
-      label: 'Type',
-      type: 'radio',
-      options: [
-        { value: 'online', label: 'Organization' },
-        { value: 'offline', label: 'Company' },
-      ],
-      rules: [{ required: true, message: 'Please select a Type!' }],
-      props: {},
-    },
-  {
-    name: 'Cname',
-    label: 'Company Name',
-    type: 'input',
-    rules: [{ required: true, message: 'Please input the name of the lead!' }],
-    props: { placeholder: 'Enter lead name' },
-  },
-  {
-      name: 'status',
-      label: 'Status',
-      type: 'select',
-      placeholder: 'Select a status',
-      options: [
-        { value: 'New', label: 'New' },
-        { value: 'qualified', label: 'Qualified' },
-        { value: 'discussion', label: 'Discussion' },
-        { value: 'negotiation', label: 'Negotiation' },
-        { value: 'won', label: 'Won' },
-        { value: 'lost', label: 'Lost' },
-      ],
-      rules: [{ required: true, message: 'Please select the status!' }],
-      props: { placeholder: 'Select lead status' },
-    },
-    {
-      name: 'owner',
-      label: 'Owner',
-      type: 'select',
-      placeholder: 'Owner',
-      options: [
-        { value: 'john', label: 'John Doe' },
-        { value: 'michael', label: 'Michael Wood' },
-        { value: 'sara', label: 'Sara Ann' },
-        { value: 'richard', label: 'Richard Gray' },
-        { value: 'mark', label: 'Mark Thomas' },
-      ],
-      rules: [{ required: true, message: 'Please select the Owner!' }],
-      props: { placeholder: 'Owner' },
-    },
-    {
-      name: 'source',
-      label: 'Source',
-      type: 'select',
-      placeholder: 'Source',
-      options: [
-        { value: 'google', label: 'Google' },
-        { value: 'fb', label: 'Facebook' },
-        { value: 'x', label: 'Twitter' },
-        { value: 'ytube', label: 'Youtube' },
-        { value: 'else', label: 'Elsewhere' },
-        { value: 'site', label: 'Site' },
-        { value: 'ads', label: 'Google Ads' },
-      ],
-      rules: [{ required: true, message: 'Please select the Source!' }],
-      props: { placeholder: 'Source' },
-    },
+  const [form] = Form.useForm();
+  // const [subFormFields, setSubFormFields] = useState([
 
-  {
-    name: 'add',
-    label: 'Address',
-    type: 'input',
-    rules: [{ required: true, message: 'Please input the address of the lead!' }],
-    props: { placeholder: 'Enter address' },
-  },
-  {
-    name: 'city',
-    label: 'City',
-    type: 'input',
-    rules: [{ required: true, message: 'Please input the City!' }],
-    props: { placeholder: 'Enter City' },
-  },
-  {
-      name: 'state',
-      label: 'State',
-      type: 'input',
-      rules: [{ required: true, message: 'Please input the State!' }],
-      props: { placeholder: 'Enter State' },
-    },
-    {
-      name: 'zip',
-      label: 'Zip',
-      type: 'input',
-      rules: [{ required: true, message: 'Please input the ZIP!' }],
-      props: { placeholder: 'Enter Zip' },
-    },
-  ]);
+  // {
+  //   name: 'Title',
+  //   label: 'Title',
+  //   type: 'input',
+  //   rules: [{ required: true, message: 'Please input the name of the lead!' }],
+  //   props: { placeholder: 'Enter lead name' },
+  // },
+  // {
+  //     name: 'FirstBillDate',
+  //     label: 'First Billing Date',
+  //     type: 'date',
+  //     placeholder: 'First Billing Date',
+  //     rules: [{ required: true, message: 'Please select the status!' }],
+  //     props: { placeholder: 'Select lead status' },
+  //   },
+  //   {
+  //     name: 'Client',
+  //     label: 'Client',
+  //     type: 'select',
+  //     placeholder: 'Owner',
+  //     options: [
+  //       { value: 'john', label: 'John Doe' },
+  //       { value: 'michael', label: 'Michael Wood' },
+  //       { value: 'sara', label: 'Sara Ann' },
+  //       { value: 'richard', label: 'Richard Gray' },
+  //       { value: 'mark', label: 'Mark Thomas' },
+  //     ],
+  //     rules: [{ required: true, message: 'Please select the Owner!' }],
+  //     props: { placeholder: 'Owner' },
+  //   },
+  //   {
+  //     name: 'Tax',
+  //     label: 'Tax',
+  //     type: 'select',
+  //     placeholder: '-',
+  //     options: [
+  //       { value: '10', label: 'Tax(10%)' },
+  //     ],
+  //     rules: [{ required: true, message: 'Please select the Source!' }],
+  //     props: { placeholder: 'Source' },
+  //   },
 
+  // {
+  //   name: 'Repeat',
+  //   label: 'Repeat Type',
+  //   type: 'input',
+  //   rules: [{ required: true, message: 'Please input the repeat!' }],
+  //   props: { placeholder: 'Enter address' },
+  // },
+  // {
+  //   name: 'Note',
+  //   label: 'Note',
+  //   type: 'input',
+  //   rules: [{ required: true, message: 'Please input the City!' }],
+  //   props: { placeholder: 'Enter City' },
+  // },
+
+  //   {
+  //     name: 'Label',
+  //     label: 'Labels',
+  //     type: 'input',
+  //     rules: [{ required: true, message: 'Please input the ZIP!' }],
+  //     props: { placeholder: 'Enter Zip' },
+  //   },
+  // ]);
   useEffect(() => {
+    fetchsubs();
+    fetchClients();
+}, []);
+
+const fetchsubs=async () => {
     axios.get('https://rise-backened-1.onrender.com/subscription')
       .then(response => {
         setData(response.data);
@@ -118,49 +94,47 @@ const Subscriptions = () => {
       .catch(error => {
         console.error('There was an error fetching the data!', error);
       });
-  }, []);
+  }
+
+  
+  const fetchClients = async () => {
+    try {
+        const res = await axios.get('https://rise-backened-1.onrender.com/clients');
+        setClients(res.data.clients);
+    } catch (error) {
+        console.log('Failed to fetch clients');
+    }
+};
 
   const showModal = () => {
     setIsModalVisible(true);
   };
 
-  const handleCreate = async(values) => {
-    // if (editingRecord) {
-    //   const updatedData = data.map(item =>
-    //     item.key === editingRecord.key ? { ...item, ...values } : item
-    //   );
-    //   setData(updatedData);
-    //   setEditingRecord(null);
-    // } else {
-    //   const newRecord = {
-    //     key: data.length ? data[data.length - 1].key + 1 : 0,
-    //     ...values,
-    //   };
-    //   axios.post('https://rise-backened-1.onrender.com/subscription', values)
-    //     .then(response => {
-    //       setData([...data, response.data]);
-    //       console.log(response.data)
-    //     })
-    //     .catch(error => {
-    //       console.error('There was an error posting the data!', error);
-    //     });
-    // }
-    // setIsModalVisible(false);
+  const handleCreate = async () => {
     try {
-      if (editingRecord) {
-        await axios.put(`https://rise-backened-1.onrender.com/subscription/${editingRecord.id}`, values);
-        // message.success('Subscription updated successfully');
-      } else {
-        await axios.post('https://rise-backened-1.onrender.com/subscription', values);
-        // message.success('Subscription added successfully');
-        console.log(values)
-      }
-      fetchData();
-      setIsModalVisible(false);
+        const values = await form.validateFields();
+        if (editingRecord) {
+            await axios.patch(`https://rise-backened-1.onrender.com/subscription/${editingRecord._id}`, {
+                ...values,
+                // lastActivity: values.lastActivity.format('YYYY-MM-DD HH:mm:ss'),
+            });
+           console.log('Subscription updated successfully');
+        } else {
+            await axios.post('https://rise-backened-1.onrender.com/subscription', {
+                ...values,
+                // lastActivity: values.lastActivity.format('YYYY-MM-DD HH:mm:ss'),
+            });
+           console.log('Subscription created successfully');
+        }
+        fetchTickets();
+        setIsModalVisible(false);
+        form.resetFields();
+        setEditingRecord(null);
     } catch (error) {
-      console.error('Error creating/updating subscription:', error);
-  };
-  }
+        console.error(error.response?.data || error.message);
+        console.log('Failed to save ticket');
+    }
+};
   const handleCancel = () => {
     setIsModalVisible(false);
     setEditingRecord(null);
@@ -223,13 +197,59 @@ const Subscriptions = () => {
       </Flex>
     </div>
     <CustomTable columns={initialColumns} data={data} onButtonEdit={handleEdit} onButtonDelete={handleDelete} showButtons={true}/>
-    <CustomModal
+    {/* <CustomModal
         visible={isModalVisible}
         onCreate={handleCreate}
         onCancel={handleCancel}
         title="Add Lead"
         fields={subFormFields}
-      />
+      /> */}
+
+<Modal
+                title={editingRecord ? 'Edit Subscription' : 'Add Subscription'}
+                visible={isModalVisible}
+                onOk={handleCreate}
+                onCancel={handleCancel}
+                destroyOnClose
+            >
+                <Form form={form} layout="vertical">
+                    <Form.Item name="Title" label="Title" rules={[{ required: true }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name='FirstBillDate' label='First Billing Date' rules={[{ required: true }]}>
+                      <DatePicker showTime format='YYYY-MM-DD'/>
+                        {/* <Input /> */}
+                    </Form.Item>
+                    <Form.Item name="Client" label="Client" rules={[{ required: true }]}>
+                        <Select placeholder="Select a client">
+                            {clients.map((client) => (
+                                <Option key={client._id} value={client._id}>
+                                    {client.name}
+                                </Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                    <Form.Item name="Tax" label="Tax" rules={[{ required: true }]}>
+                        <Select placeholder="-">
+                            <Option value="10">Tax(10%)</Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item
+                        name="Repeat"
+                        label="Repeat Type"
+          
+                    >
+                      <InputNumber/>
+                      <DatePicker showWeek/>
+                    </Form.Item>
+                    <Form.Item name="Note" label="Note" rules={[{ required: true }]}>
+                        <Input/>
+                    </Form.Item>
+                    <Form.Item name="Label" label="Labels" rules={[{ required: true }]}>
+                        <Input/>
+                    </Form.Item>
+                </Form>
+            </Modal>
 </div>
     
   );

@@ -34,6 +34,7 @@ const Tickets = () => {
                 params: query
             });
             setTickets(res.data.tickets);
+            console.log(res.data.tickets);
         } catch (error) {
             message.error('Failed to fetch tickets');
         }
