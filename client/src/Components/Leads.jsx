@@ -42,7 +42,7 @@ const Leads = () => {
   const handleChange = (value, filterType) => {
     const updatedFilters = { ...filters, [filterType]: value };
     setFilters(updatedFilters);
-    fetchTickets(updatedFilters);
+    fetchData(updatedFilters);
 };
   const handleCreate = async (values) => {
     try {
